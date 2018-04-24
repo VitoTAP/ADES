@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?><wps:Execute version="1.0.0" service="WPS" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opengis.net/wps/1.0.0" xmlns:wfs="http://www.opengis.net/wfs" xmlns:wps="http://www.opengis.net/wps/1.0.0" xmlns:ows="http://www.opengis.net/ows/1.1" xmlns:gml="http://www.opengis.net/gml" xmlns:ogc="http://www.opengis.net/ogc" xmlns:wcs="http://www.opengis.net/wcs/2.0" xmlns:xlink="http://www.w3.org/1999/xlink" xsi:schemaLocation="http://www.opengis.net/wps/1.0.0 http://schemas.opengis.net/wps/1.0.0/wpsAll.xsd">
+    <ows:Identifier>DockerProcessFiles</ows:Identifier>
+    <wps:DataInputs>
+        <wps:Input>
+            <ows:Identifier>OpenSearchQuery</ows:Identifier>
+            <wps:Data><wps:LiteralData>platform:S1</wps:LiteralData></wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>DockerImage</ows:Identifier>
+            <wps:Data><wps:LiteralData>ogc/eoephackaton:latest</wps:LiteralData></wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>DockerRunCommand</ows:Identifier>
+            <wps:Data><wps:LiteralData>/opt/snap/bin/gpt -e "/S1_Cal_Deb_ML_Spk_TC_cmd.xml" "-Pinputdata=/data/CGS_S1_SLC_L1/IW/DV/2018/02/17/S1B_IW_SLC__1SDV_20180217T060533_20180217T060600_009659_0116BD_A58F/S1B_IW_SLC__1SDV_20180217T060533_20180217T060600_009659_0116BD_A58F.zip" "-Poutputdata=/out/S1result"</wps:LiteralData></wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>DockerMount</ows:Identifier>
+            <wps:Data><wps:ComplexData mimeType="application/json"><![CDATA[{"type": "bind", "target": "/data", "source":"/home/driesj/alldata/CGS_S1","read_only": true}]]></wps:ComplexData></wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>DockerMount</ows:Identifier>
+            <wps:Data><wps:ComplexData mimeType="application/json"><![CDATA[{"type": "bind", "target": "/out", "source":"/tmp","read_only": false}]]></wps:ComplexData></wps:Data>
+        </wps:Input>
+    </wps:DataInputs>
+    <wps:ResponseForm>
+        <wps:RawDataOutput mimeType="application/json">
+            <ows:Identifier>file_list</ows:Identifier>
+        </wps:RawDataOutput>
+    </wps:ResponseForm>
+</wps:Execute>
