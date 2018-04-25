@@ -1,0 +1,79 @@
+{
+  "id": "319addff-5a0a-4c5c-8322-559a0d855de3",
+  "title": "S1B_IW_SLC__1SDV_20180401T055805_20180401T055832_010286_012B58_B59B",
+  "summary": "Date: 2018-04-01T05:58:05.016Z, Instrument: SAR-C SAR, Mode: VV VH, Satellite: Sentinel-1, Size: 7.75 GB",
+  "links": [
+    {
+      "href": "https://colhub.copernicus.eu/dhus/odata/v1/Products('319addff-5a0a-4c5c-8322-559a0d855de3')/$value"
+    },
+    {
+      "rel": "alternative",
+      "href": "https://colhub.copernicus.eu/dhus/odata/v1/Products('319addff-5a0a-4c5c-8322-559a0d855de3')/"
+    },
+    {
+      "rel": "icon",
+      "href": "https://colhub.copernicus.eu/dhus/odata/v1/Products('319addff-5a0a-4c5c-8322-559a0d855de3')/Products('Quicklook')/$value"
+    }
+  ],
+  "properties": {
+    "ingestiondate": "2018-04-01T10:27:02.6Z",
+    "beginposition": "2018-04-01T05:58:05.016Z",
+    "endposition": "2018-04-01T05:58:32.117Z",
+    "missiondatatakeid": "76632",
+    "orbitnumber": 10286,
+    "lastorbitnumber": "10286",
+    "relativeorbitnumber": 110,
+    "lastrelativeorbitnumber": "110",
+    "slicenumber": "16",
+    "acquisitiontype": "NOMINAL",
+    "filename": "S1B_IW_SLC__1SDV_20180401T055805_20180401T055832_010286_012B58_B59B.SAFE",
+    "gmlfootprint": "<gml:Polygon srsName=\"http://www.opengis.net/gml/srs/epsg.xml#4326\" xmlns:gml=\"http://www.opengis.net/gml\">\n   <gml:outerBoundaryIs>\n      <gml:LinearRing>\n         <gml:coordinates>48.790398,4.795352 49.195808,1.273045 50.818138,1.657381 50.410713,5.302383 48.790398,4.795352</gml:coordinates>\n      </gml:LinearRing>\n   </gml:outerBoundaryIs>\n</gml:Polygon>",
+    "format": "SAFE",
+    "identifier": "S1B_IW_SLC__1SDV_20180401T055805_20180401T055832_010286_012B58_B59B",
+    "instrumentshortname": "SAR-C SAR",
+    "sensoroperationalmode": "IW",
+    "instrumentname": "Synthetic Aperture Radar (C-band)",
+    "swathidentifier": "IW1 IW2 IW3",
+    "footprint": "POLYGON ((4.795352 48.790398,1.273045 49.195808,1.657381 50.818138,5.302383 50.410713,4.795352 48.790398))",
+    "platformidentifier": "2016-025A",
+    "orbitdirection": "DESCENDING",
+    "polarisationmode": "VV VH",
+    "productclass": "S",
+    "producttype": "SLC",
+    "platformname": "Sentinel-1",
+    "size": "7.75 GB",
+    "status": "ARCHIVED",
+    "uuid": "319addff-5a0a-4c5c-8322-559a0d855de3",
+    "processing_status": {
+      "status": "DONE"
+    }
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          4.795352,
+          48.790398
+        ],
+        [
+          1.273045,
+          49.195808
+        ],
+        [
+          1.657381,
+          50.818138
+        ],
+        [
+          5.302383,
+          50.410713
+        ],
+        [
+          4.795352,
+          48.790398
+        ]
+      ]
+    ]
+  },
+  "local_filename": "/data/CGS_S1_SLC_L1/IW/DV/2018/04/01/S1B_IW_SLC__1SDV_20180401T055805_20180401T055832_010286_012B58_B59B/S1B_IW_SLC__1SDV_20180401T055805_20180401T055832_010286_012B58_B59B.zip"
+}

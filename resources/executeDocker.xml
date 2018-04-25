@@ -3,7 +3,7 @@
     <wps:DataInputs>
         <wps:Input>
             <ows:Identifier>OpenSearchQuery</ows:Identifier>
-            <wps:Data><wps:LiteralData>platform:S1</wps:LiteralData></wps:Data>
+            <wps:Data><wps:LiteralData>properties.identifier:S1B_IW_SLC__1SDV_20180217T060533_20180217T060600_009659_0116BD_A58F</wps:LiteralData></wps:Data>
         </wps:Input>
         <wps:Input>
             <ows:Identifier>DockerImage</ows:Identifier>
@@ -11,7 +11,7 @@
         </wps:Input>
         <wps:Input>
             <ows:Identifier>DockerRunCommand</ows:Identifier>
-            <wps:Data><wps:LiteralData>/opt/snap/bin/gpt -e "/S1_Cal_Deb_ML_Spk_TC_cmd.xml" "-Pinputdata=/data/CGS_S1_SLC_L1/IW/DV/2018/02/17/S1B_IW_SLC__1SDV_20180217T060533_20180217T060600_009659_0116BD_A58F/S1B_IW_SLC__1SDV_20180217T060533_20180217T060600_009659_0116BD_A58F.zip" "-Poutputdata=/out/S1result"</wps:LiteralData></wps:Data>
+            <wps:Data><wps:LiteralData>/opt/snap/bin/gpt -e "/S1_Cal_Deb_ML_Spk_TC_cmd.xml" "-Pinputdata=${local_filename}" "-Poutputdata=/out/S1result"</wps:LiteralData></wps:Data>
         </wps:Input>
         <wps:Input>
             <ows:Identifier>DockerMount</ows:Identifier>

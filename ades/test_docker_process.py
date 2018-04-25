@@ -7,7 +7,8 @@ from ades import app
 import requests_mock
 import requests
 import json
-
+from ades.docker_generic import DockerProcessFiles
+from .query_opensearch import get_products
 
 class Response(BaseResponse):
     @cached_property
@@ -36,8 +37,21 @@ class TestDockerRun(TestCase):
             result = self.app.post("wps", content_type="application_xml",data=xml)
             print(str(result.data))
 
+    def test_command_templates(self):
+
+
+        #products = get_products("properties.beginposition:[2018-04-01 TO 2018-04-10] AND properties.orbitdirection:DESCENDING AND properties.platformname:Sentinel-1 AND properties.producttype:SLC")
+        with open("resources/S1_product.json") as productfile:
+            products = [json.load(productfile)]
+        print(products)
+        template = '/opt/snap/bin/gpt -e "/S1_Cal_Deb_ML_Spk_TC_cmd.xml" "-Pinputdata=$local_filename" "-Poutputdata=/out/S1result"'
+        commands = DockerProcessFiles.get_commands(products[0:1],template)
+        print(commands)
+        self.assertEqual('/opt/snap/bin/gpt -e "/S1_Cal_Deb_ML_Spk_TC_cmd.xml" "-Pinputdata=/data/CGS_S1_SLC_L1/IW/DV/2018/04/01/S1B_IW_SLC__1SDV_20180401T055805_20180401T055832_010286_012B58_B59B/S1B_IW_SLC__1SDV_20180401T055805_20180401T055832_010286_012B58_B59B.zip" "-Poutputdata=/out/S1result"',commands[0])
+
     def test_docker_run(self):
         from ades.docker_process import DockerRun
         process = DockerRun()
         process.submit_files()
+
 
