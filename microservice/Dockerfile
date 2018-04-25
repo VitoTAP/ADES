@@ -16,5 +16,6 @@ ADD fire_wps.py /usr/bin/local/fire_wps.py
 ADD requirements.txt /tmp/requirements.txt
 RUN yum -y install gcc libxml2-devel libxslt-devel && yum -y clean all --enablerepo='*'
 RUN source scl_source enable rh-python35 && pip install --index-url https://artifactory.vgt.vito.be/api/pypi/python-packages/simple -r /tmp/requirements.txt
+EXPOSE 5000/tcp
 USER ogc
 CMD source scl_source enable rh-python35 && python /usr/bin/local/fire_wps.py
