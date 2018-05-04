@@ -8,7 +8,7 @@ class DockerRun(Process):
     args=["--input","${input.filename}"]
 
 
-    def __init__(self,identifier,image = "ogc/snapimage"):
+    def __init__(self,identifier,image = "ogc/eoephackaton"):
         inputs = [
             LiteralInput('OpenSearchQuery','OpenSearchQuery', data_type='string')
         ]
@@ -25,7 +25,10 @@ class DockerRun(Process):
 
 
     def _handler(self,request, response):
-        pass
+        query = request.inputs['OpenSearchQuery'][0].data
+        print("processing query:" + query)
+        self.submit_files() 
+        return response
 
 
     def submit_files(self):
@@ -33,9 +36,11 @@ class DockerRun(Process):
         client = docker.from_env()
         try:
             client.containers.run(self.image, ["/opt/snap/bin/gpt", "-e", "/S1_Cal_Deb_ML_Spk_TC_cmd.xml",
-                                                          "-Pinputdata=/data/CGS_S1_SLC_L1/IW/DV/2018/02/17/S1B_IW_SLC__1SDV_20180217T060533_20180217T060600_009659_0116BD_A58F/S1B_IW_SLC__1SDV_20180217T060533_20180217T060600_009659_0116BD_A58F.zip",
+                                                          "-Pinputdata=/eodata/Sentinel-1/SAR/SLC/2017/06/17/S1A_IW_SLC__1SDV_20170617T064400_20170617T064430_017070_01C718_E903.SAFE",
                                                           "-Poutputdata=/out/S1result"],
-                                  volumes={'/home/driesj/alldata/CGS_S1': {'bind': '/data', 'mode': 'ro'},
-                                           '/tmp': {'bind': '/out', 'mode': 'rw'}})
+                                  volumes={'/eodata': {'bind': '/eodata', 'mode': 'ro'},
+                                           '/tmp': {'bind': '/out', 'mode': 'rw'},
+                                           '/DEM': {'bind': '/DEM', 'mode': 'rw'}
+                                          })
         except ContainerError as e:
             print(e.stderr)
