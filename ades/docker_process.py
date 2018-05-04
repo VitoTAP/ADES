@@ -10,7 +10,7 @@ class DockerRun(Process):
 
     def __init__(self,identifier,image = "ogc/eoephackaton"):
         inputs = [
-            LiteralInput('OpenSearchQuery','OpenSearchQuery', data_type='string')
+            LiteralInput('local_filename','local_filename', data_type='string')
         ]
         outputs = [
             ComplexOutput(identifier='file_list',title='file list', supported_formats = [Format('JSON')])
@@ -25,8 +25,8 @@ class DockerRun(Process):
 
 
     def _handler(self,request, response):
-        query = request.inputs['OpenSearchQuery'][0].data
-        print("processing query:" + query)
+        files = request.inputs['local_filename'][0].data
+        print("processing files:" + files)
         self.submit_files() 
         return response
 
