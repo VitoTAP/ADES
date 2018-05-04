@@ -18,6 +18,9 @@ spec:
       - name: dem 
         persistentVolumeClaim:
          claimName: dem-claim
+      - name: eodata 
+        persistentVolumeClaim:
+         claimName: eodata-claim
       containers:
       - name: firewps
         image: vito-docker.artifactory.vgt.vito.be/firewps
@@ -26,6 +29,8 @@ spec:
         volumeMounts:
             - name: dem
               mountPath: "DEM"
+            - name: eodata 
+              mountPath: "/eodata"
 ---
 kind: Service
 apiVersion: v1
@@ -63,6 +68,34 @@ metadata:
   name: dem-claim
   labels:
     type: dem
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: eodata 
+  labels:
+    type: eodata
+spec:
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: nfs.eodata.cloudferro.com
+    path: "/eodata/repository"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: eodata-claim
+  labels:
+    type: eodata
 spec:
   accessModes:
     - ReadWriteOnce
