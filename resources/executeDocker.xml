@@ -2,8 +2,27 @@
     <ows:Identifier>DockerProcessFiles</ows:Identifier>
     <wps:DataInputs>
         <wps:Input>
-            <ows:Identifier>OpenSearchQuery</ows:Identifier>
-            <wps:Data><wps:LiteralData>properties.identifier:S1B_IW_SLC__1SDV_20180217T060533_20180217T060600_009659_0116BD_A58F</wps:LiteralData></wps:Data>
+            <ows:Identifier>local_filename</ows:Identifier>
+            <wps:Reference mimeType="application/json" xlink:href="http://localhost:5000/wps" method="POST">
+                <wps:Body>
+                    <wps:Execute version="1.0.0" service="WPS">
+                        <ows:Identifier>find_local_files</ows:Identifier>
+                        <wps:DataInputs>
+                            <wps:Input>
+                                <ows:Identifier>OpenSearch Query</ows:Identifier>
+                                <wps:Data>
+                                    <wps:LiteralData><![CDATA[https://finder.eocloud.eu/resto/api/collections/Sentinel1/search.json?maxRecords=2000&startDate=2017-06-17T00:00:00Z&completionDate=2017-06-28T23:59:59Z&productType=SLC&processingLevel=LEVEL1&sensorMode=IW&sortParam=startDate&sortOrder=descending&geometry=POLYGON((-122.87109374999997+78.59529919212491,-74.00390624999997+78.52557254138316,-99.31640624999996+58.7225988280434,-140.80078124999997+58.90464570302001,-150.99609374999994+71.91088787611528,-122.87109374999997+78.59529919212491))&dataset=ESA-DATASET]]></wps:LiteralData>
+                                </wps:Data>
+                            </wps:Input>
+                        </wps:DataInputs>
+                        <wps:ResponseForm>
+                            <wps:RawDataOutput mimeType="application/json">
+                                <ows:Identifier>local_filename</ows:Identifier>
+                            </wps:RawDataOutput>
+                        </wps:ResponseForm>
+                    </wps:Execute>
+                </wps:Body>
+            </wps:Reference>
         </wps:Input>
         <wps:Input>
             <ows:Identifier>DockerImage</ows:Identifier>
@@ -15,7 +34,11 @@
         </wps:Input>
         <wps:Input>
             <ows:Identifier>DockerMount</ows:Identifier>
-            <wps:Data><wps:ComplexData mimeType="application/json"><![CDATA[{"type": "bind", "target": "/data", "source":"/home/driesj/alldata/CGS_S1","read_only": true}]]></wps:ComplexData></wps:Data>
+            <wps:Data><wps:ComplexData mimeType="application/json"><![CDATA[{"type": "bind", "target": "/eodata", "source":"/eodata","read_only": true}]]></wps:ComplexData></wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>DockerMount</ows:Identifier>
+            <wps:Data><wps:ComplexData mimeType="application/json"><![CDATA[{"type": "bind", "target": "/home/ogc/.snap/auxdata/dem", "source":"/DEM","read_only": true}]]></wps:ComplexData></wps:Data>
         </wps:Input>
         <wps:Input>
             <ows:Identifier>DockerMount</ows:Identifier>

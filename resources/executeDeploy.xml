@@ -5,10 +5,62 @@
             <ows:Identifier>identifier</ows:Identifier>
             <wps:Data><wps:LiteralData>myprocess</wps:LiteralData></wps:Data>
         </wps:Input>
+        <wps:Input>
+            <ows:Identifier>DockerImage</ows:Identifier>
+            <wps:Data><wps:LiteralData>ogc/eoephackaton:latest</wps:LiteralData></wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>DockerRunCommand</ows:Identifier>
+            <wps:Data><wps:LiteralData>/opt/snap/bin/gpt -e "/S1_Cal_Deb_ML_Spk_TC_cmd.xml" "-Pinputdata=${local_filename}" "-Poutputdata=/out/S1result"</wps:LiteralData></wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>DockerMount</ows:Identifier>
+            <wps:Data><wps:ComplexData mimeType="application/json"><![CDATA[{"type": "bind", "target": "/eodata", "source":"/eodata","read_only": true}]]></wps:ComplexData></wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>DockerMount</ows:Identifier>
+            <wps:Data><wps:ComplexData mimeType="application/json"><![CDATA[{"type": "bind", "target": "/home/ogc/.snap/auxdata/dem/CDEM", "source":"/DEM/CDEM","read_only": true}]]></wps:ComplexData></wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>DockerMount</ows:Identifier>
+            <wps:Data><wps:ComplexData mimeType="application/json"><![CDATA[{"type": "bind", "target": "/out", "source":"/tmp","read_only": false}]]></wps:ComplexData></wps:Data>
+        </wps:Input>
+        <wps:Input>
+            <ows:Identifier>ProcessDescription</ows:Identifier>
+            <wps:Data><wps:ComplexData mimeType="application/xml">
+                <wps:ProcessOffering
+               jobControlOptions="async-execute dismiss"
+               outputTransmission="value reference"
+               xmlns:wps="http://www.opengis.net/wps/2.0"
+               xmlns:ows="http://www.opengis.net/ows/2.0"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://www.opengis.net/wps/2.0
+                                   http://schemas.opengis.net/wps/2.0/wps.xsd">
+               <wps:Process>
+                  <ows:Title>S1 Fire detection</ows:Title>
+                  <ows:Abstract>S1 Fire detection in Canada</ows:Abstract>
+                  <ows:Identifier>Fire_Detection</ows:Identifier>
+                  <wps:Input>
+                     <ows:Title>Opensearch query</ows:Title>
+                     <ows:Abstract>OpenSearch query string</ows:Abstract>
+                     <ows:Identifier>query</ows:Identifier>
+                     <wps:LiteralData>
+                        <wps:Format mimeType="text/plain" default="true"/>
+                     </wps:LiteralData>
+                  </wps:Input>
+                  <wps:Output>
+                     <ows:Title>GeoTIF Images</ows:Title>
+                     <ows:Abstract>List of Geotiff image paths.</ows:Abstract>
+                     <ows:Identifier>Image</ows:Identifier>
+                     <wps:LiteralData>
+                        <wps:Format mimeType="text/plain" default="true"/>
+                     </wps:LiteralData>
+                  </wps:Output>
+               </wps:Process>
+</wps:ProcessOffering>
+            </wps:ComplexData></wps:Data>
+        </wps:Input>
     </wps:DataInputs>
     <wps:ResponseForm>
-        <wps:RawDataOutput mimeType="text">
-            <ows:Identifier>cropped_coverage</ows:Identifier>
-        </wps:RawDataOutput>
     </wps:ResponseForm>
 </wps:Execute>
